@@ -10,6 +10,7 @@ db = SQLAlchemy(app)
 class Doing(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100))
+    status=db.Column(db.Boolean,default=False)
 
     def __init__(self, name):
         self.name = name
@@ -33,13 +34,25 @@ def delete(id):
     db.session.delete(task_delete)
     db.session.commit()
     return redirect('/view')
+@app.route('/fait/<int:id>')
+def fait(id):
+    task_fait = Doing.query.get(id)
+    task_fait.status=True
+    db.session.commit()
+    return redirect('/view')
 
 @app.route('/update/<int:id>', methods=['GET', 'POST'])
 def update(id):
     task_edit = Doing.query.get_or_404(id)
+    db.session.delete(task_edit)
 
     if request.method == 'POST':
         email = request.form['email']
+
+        email_ = Doing(name=email)
+
+        db.session.add(email_)
+
         db.session.commit()
         return redirect('/view')
        
