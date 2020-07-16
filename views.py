@@ -16,7 +16,8 @@ class Doing(db.Model):
         self.name = name
     
     def __repr(self):
-        return '<name %s>' %self.names
+        return '<name %s>' %self.name
+
 db.create_all()
 
 @app.route("/")
@@ -34,6 +35,7 @@ def delete(id):
     db.session.delete(task_delete)
     db.session.commit()
     return redirect('/view')
+
 @app.route('/fait/<int:id>')
 def fait(id):
     task_fait = Doing.query.get(id)

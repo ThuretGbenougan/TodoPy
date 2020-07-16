@@ -2,17 +2,26 @@
 {% block title %}Vue{% endblock %}
 
 {% block content %}
-    <a class="btn btn-outline-secondary" href="/user">Ajouter une tâche</a>
+    <a class="btn btn-outline-secondary" href="/user">Ajouter une tâche</a><br>
         <table class="table">
             <tr>
                 <th>Task</th>
                 <th>Nom</th>
+                <th>Statuts</th>
                 <th>Actions</th>
             </tr>
             {% for item in values %}
                 <tr>
                     <td>{{item.id}}</td>
                     <td>{{item.name}}</td>
+                    <td> 
+                        {%if item.status %}
+                        <a href=""><i class="fa fa-check"></i></a>
+                        {%else%}
+                        <a href="/fait/{{item.id}}" title="non fait"><i class="fa fa-circle"></i></a>
+
+                        {%endif%}
+                    </td>
                     <td>
                         <a href="/update/{{item.id}}"><i class="fa fa-pencil-square-o"></i></a>
                         
