@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Vue{% endblock %}
+
+{% block content %}
+    <a class="btn btn-outline-secondary" href="/user">Ajouter une tâche</a>
+        <table class="table">
+            <tr>
+                <th>Task</th>
+                <th>Nom</th>
+                <th>Actions</th>
+            </tr>
+            {% for item in values %}
+                <tr>
+                    <td>{{item.id}}</td>
+                    <td>{{item.name}}</td>
+                    <td>
+                        <a href="/update/{{item.id}}"><i class="fa fa-pencil-square-o"></i></a>
+                        
+                        <a class="red text-error" href="/delete/{{item.id}}"> <i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    
+    
+
+{% endblock %}
