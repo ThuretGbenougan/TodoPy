@@ -11,12 +11,15 @@
     <section class="hero is-success is-fullheight">
       <div class="hero-body">
         <div class="container">
+           {%for item in values %} 
           <h1 class="title">
-            {{g.user.username}}'s Profile
+            {{item.id}}'s Profile
           </h1>
           <h2 class="subtitle">
-            You are user number #{{g.user.id}}
+            {{item.name}}'s Profile
+
           </h2>
+          {% endfor %}
           <a href="/task">djjdjd</a>
         </div>
       </div>

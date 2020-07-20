@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Login Page{% endblock %}
+
+{% block content %}
+
+
+<form action="/register" method="POST">
+	<p>Inscriver vous ici!</p>
+	<p><input type="text" name="username" placeholder="Entrer votre pseudo" value="" /></p>
+	<p><input type="submit" value="Valider"/></p>
+</form>
+
+{% endblock %}
