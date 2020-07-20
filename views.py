@@ -35,13 +35,14 @@ def view():
         userr = session["userr"]
         task=Doing.query.all()  
         return render_template("view.html",values=task)
-    return redirect('/view')
+    else:
+        flash("Connectez vous d'abord!", "info  ")
+        return redirect('/login')
         
 
 @app.route('/delete/<int:id>')
 def delete(id):
     task_delete = Doing.query.get_or_404(id)
-
     db.session.delete(task_delete)
     db.session.commit()
     return redirect('/view')
@@ -60,11 +61,8 @@ def update(id):
 
     if request.method == 'POST':
         email = request.form['email']
-
         email_ = Doing(name=email)
-
         db.session.add(email_)
-
         db.session.commit()
         return redirect('/view')
        
@@ -76,8 +74,8 @@ def update(id):
 def login():
     if request.method == "POST":
         session.permanent_session_lifetime = True
-        userr = request.form["name"]
-        session["userr"]=userr
+        user = request.form["names"]
+        session["user"]=userr
         return redirect(url_for("userr"))
     else:
         if "userr" in session:
@@ -100,7 +98,7 @@ def task():
         return render_template("addtask.html")
 
 
-@app.route("/userr")
+@app.route("/userr",methods=["POST", "GET"])
 def userr():
     if "userr" in session:
         userr = session["userr"]
