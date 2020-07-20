@@ -22,7 +22,6 @@ class Doing(db.Model):
         return '<name %s>' %self.name
 
 
-
 db.create_all()
 
 @app.route("/")
@@ -32,10 +31,11 @@ def home():
 @app.route("/view" , methods=["POST", "GET"])
 def view():
     if "userr" in session:
-        userr = session["userr"]
+
         task=Doing.query.all()  
         return render_template("view.html",values=task)
-    return redirect('/view')
+    return redirect(url_for('login'))
+    
         
 
 @app.route('/delete/<int:id>')
@@ -104,7 +104,8 @@ def task():
 def userr():
     if "userr" in session:
         userr = session["userr"]
-        return f"<h1>{userr}</h1>"
+        # return f"<h1>{userr}</h1>"
+        return redirect(url_for('view'))
     else:
         return redirect(url_for('login'))
 
