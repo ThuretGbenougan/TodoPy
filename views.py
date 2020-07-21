@@ -39,7 +39,11 @@ db.create_all()
 
 @app.route("/")
 def home():
-    return render_template("index.html")
+    # if "id" in session:
+    #     return render_template("index.html")
+    # else:
+    flash("Inscrivez vous ou connectez vous","info")
+    return render_template("login.html")
 
 @app.route("/view/<int:id>" , methods=["POST", "GET"])
 def view(id):
@@ -100,6 +104,7 @@ def login():
         username = request.form["username"]
         user = User.query.filter_by(username=username).first_or_404()
         session["id"]=user.id
+        flash("Connexion reussie ")
         return redirect(url_for("view",id=user.id))
     else:
         return render_template("login.html")
@@ -129,11 +134,13 @@ def userr():
 
 @app.route("/profile")
 def profile():
-    if "userr" in session:
+    if "id" in session:
+        online=User.query.filter_by(id=id)
+        return render_template("profile.html",values=online)
 
-        # tasker=User.query.all()
-        tasker=Doing.query.filter_by(user_id=1).first()  
-        return render_template("profile.html",values=tasker)
+        # # tasker=User.query.all()
+        # tasker=Doing.query.filter_by(user_id=1).first()  
+        # return render_template("profile.html",values=tasker)
     return redirect(url_for('login'))
     
 @app.route("/logout")
