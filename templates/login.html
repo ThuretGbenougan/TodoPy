@@ -2,10 +2,28 @@
 {% block title %}Login Page{% endblock %}
 
 {% block content %}
+<<<<<<< HEAD
 	
 <form action="/login" method="post">
 	<p>Name:</p>
 	<p><input type="text" name="names" /></p>
 	<p><input type="submit" value="submit"/></p>
 </form>
+=======
+<form action="{{url_for('login') }}" method="post">
+	<h4>Merci de vous connecter</h4>
+	{% with  messages = get_flashed_messages() %}
+		{% if messages %}
+			{% for msg in messages %}
+			<div class="alert alert-danger" role="alert">
+				{{ msg }}
+			</div>
+			{% endfor%}
+		{% endif%}
+	{% endwith%}
+	<p>Name:</p>
+	<p><input type="text" name="username" class="form-control" required></p>
+	<button type="submit" class="btn btn-primary">Connexion</button> <i>ou</i> <a href="{{url_for('register') }} "><strong>S'inscrire</strong></a>
+</form> 
+>>>>>>> thuret
 {% endblock %}

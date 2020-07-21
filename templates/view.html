@@ -1,8 +1,24 @@
 {% extends "base.html" %}
+<<<<<<< HEAD
 {% block title %}Liste des tâches{% endblock %}
+=======
+{% block title %}Vue{% endblock %} 
+>>>>>>> thuret
 
 {% block content %}
-    <a class="btn btn-outline-secondary" href="/task">Ajouter une tâche</a><br>
+{% with  messages = get_flashed_messages() %}
+		{% if messages %}
+			{% for msg in messages %}
+			<div class="alert alert-success" role="alert">
+                {{ msg }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+			</div>
+			{% endfor%}
+		{% endif%}
+	{% endwith%}
+    <a class="btn btn-outline-secondary" href="{{url_for('task') }} ">Ajouter une tâche</a><br>
         <table class="table">
             <tr>
                 <th>Task</th>
@@ -18,7 +34,7 @@
                         {%if item.status %}
                         <a href=""><i class="fa fa-check"></i></a>
                         {%else%}
-                        <a href="/fait/{{item.id}}" title="non fait"><i class="fa fa-circle"></i></a>
+                        <a href="/done/{{item.id}}" title="non fait"><i class="fa fa-circle"></i></a>
 
                         {%endif%}
                     </td>

@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Login Page{% endblock %}
+
+{% block content %}
+
+<form action="/register" method="POST">
+	<p>Inscriver vous ici!</p>
+	<p><input type="text" name="username" placeholder="Entrer votre pseudo" class="form-control" required></p>
+	<p>	<button type="submit" class="btn btn-primary">S'inscrire</button> <i>ou</i> <a href="{{url_for('login') }} "><strong>Se connecter</strong></a>
+	</p>
+</form>
+
+{% endblock %}
